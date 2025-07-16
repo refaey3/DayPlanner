@@ -16,11 +16,14 @@ export default function TaskContainer() {
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
   };
-
+  const delTask = (del) => {
+    const res=tasks.filter((item)=>del!==item);
+    setTasks(res) 
+  };
   return (
     <Containerr>
       <Head addNewTask={addTask} />
-      <Body tasks={tasks}/>
+      <Body tasks={tasks} deleteTask={delTask}/>
     </Containerr>
   );
 }

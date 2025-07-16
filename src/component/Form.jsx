@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import Swal from "sweetalert2";
 const FormContaier = styled("div")`
   position: fixed;
   transform: translate(-50%, -50%);
@@ -86,6 +87,9 @@ const StartTime = styled("input")`
     color: #777;
     top: -22px;
     font-size: 20px;
+    @media (min-width: 600px) {
+      left: 57px;
+    }
   }
 `;
 const EndTime = styled("input")`
@@ -99,6 +103,9 @@ const EndTime = styled("input")`
     color: #777;
     top: -22px;
     font-size: 20px;
+    @media (min-width: 600px) {
+      left: 286px;
+    }
   }
 `;
 const Footer = styled("div")`
@@ -133,6 +140,14 @@ export default function Form({ setFormState, addNewTask }) {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const handelSumbit = () => {
+    if (title.trim() === "") {
+      Swal.fire({
+        text: "Add Task",
+        icon: "error",
+      });
+
+      return;
+    }
     const task = {
       title,
       category,

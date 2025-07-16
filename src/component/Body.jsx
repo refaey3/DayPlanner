@@ -37,11 +37,22 @@ const Category = styled("span")`
   right: 50px;
   width: 52px;
   text-align: center;
-
 `;
-const StudyCategory=styled(Category)`
-background-color: hsla(120, 92%, 46%, 1.00);
-`
+const StudyCategory = styled(Category)`
+  background-color: yellow;
+`;
+const WorkCategory = styled(Category)`
+  background-color: blue;
+`;
+const HealthCategory = styled(Category)`
+  background-color: red;
+`;
+const PersonalCategory = styled(Category)`
+  background-color: green;
+`;
+const OtherCategory = styled(Category)`
+  background-color: gray;
+`;
 const TaskTime = styled("span")`
   position: absolute;
   right: 106px;
@@ -61,25 +72,52 @@ const Trash = styled("i")`
   padding: 10px;
   border-radius: 5px;
 `;
-export default function Body({ tasks }) {
+const NoTasksMessage = styled("h1")`
+  text-align: center;
+  color: #777;
+  margin: 35px;
+`;
+export default function Body({ tasks, deleteTask }) {
   return (
     <>
-      {tasks.map((task) => (
-        <TaskBody>
-          <Task>
-            <Input type="checkbox" />
-            <Info>{task.title}</Info>
-            {task.category==="study"&&(<StudyCategory>{task.category}</StudyCategory>)}
-            
-            <TaskTime>{task.startTime}-{task.endTime}</TaskTime>
-          </Task>
-          <Icons>
-            <Trash>
-              <FaTrash />
-            </Trash>
-          </Icons>
-        </TaskBody>
-      ))}
+      {!tasks.length ? (
+        <NoTasksMessage>Not Tasks Yet</NoTasksMessage>
+      ) : (
+        tasks.map((task) => {
+          return (
+            <TaskBody key={task.id}>
+              <Task>
+                <Input type="checkbox" />
+                <Info>{task.title}</Info>
+                {task.category === "study" && (
+                  <StudyCategory>{task.category}</StudyCategory>
+                )}
+                {task.category === "health" && (
+                  <HealthCategory>{task.category}</HealthCategory>
+                )}
+                {task.category === "personal" && (
+                  <PersonalCategory>{task.category}</PersonalCategory>
+                )}
+                {task.category === "work" && (
+                  <WorkCategory>{task.category}</WorkCategory>
+                )}
+                {task.category === "other" && (
+                  <OtherCategory>{task.category}</OtherCategory>
+                )}
+
+                <TaskTime>
+                  {task.startTime}-{task.endTime}
+                </TaskTime>
+              </Task>
+              <Icons>
+                <Trash onClick={() => deleteTask(task)}>
+                  <FaTrash />
+                </Trash>
+              </Icons>
+            </TaskBody>
+          );
+        })
+      )}
     </>
   );
 }
