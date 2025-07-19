@@ -2419,7 +2419,7 @@ font-size: 20px;
   margin: auto;
   border-radius: 10px;
   @media (max-width: 600px) {
-    width: 60%;
+    width: 90%;
     padding: 20px;
   }
 `,PQ=ie("form")`
