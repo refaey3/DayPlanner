@@ -1,6 +1,7 @@
 import React from "react";
 import { FaHouse } from "react-icons/fa6";
 import { FaFile, FaClipboardList, FaMoon } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -12,19 +13,19 @@ export default function Header() {
       <div className="rigth">
         <ul>
           <li>
-            <a href="#">
+            <Link to="/">
               Home <FaHouse />
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to="/sechedule">
               Schedule <FaClipboardList />
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to="/azkar">
               Azkar <FaMoon />
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

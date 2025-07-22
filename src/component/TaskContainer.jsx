@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Head from "./Head";
-import { useState } from "react";
 import Body from "./Body";
 const Containerr = styled("div")`
     background-color: #fff;
@@ -11,19 +10,12 @@ const Containerr = styled("div")`
     position: relative;
     height: fit-content;
 }`;
-export default function TaskContainer() {
-  const [tasks, setTasks] = useState([]);
-  const addTask = (newTask) => {
-    setTasks([...tasks, newTask]);
-  };
-  const delTask = (del) => {
-    const res=tasks.filter((item)=>del!==item);
-    setTasks(res) 
-  };
+export default function TaskContainer({tasks,addNewTask,deleteTask,setTasks}) {
+  
   return (
     <Containerr>
-      <Head addNewTask={addTask} />
-      <Body tasks={tasks} deleteTask={delTask}/>
+      <Head addNewTask={addNewTask} />
+      <Body tasks={tasks} deleteTask={deleteTask} setTasks={setTasks}/>
     </Containerr>
   );
 }

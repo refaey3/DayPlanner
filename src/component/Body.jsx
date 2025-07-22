@@ -27,6 +27,10 @@ const Info = styled("div")`
   color: #333;
   display: flex;
 `;
+const InfoCheck = styled(Info)`
+  text-decoration: ${(prop) => (prop.checked ? "line-through" : "none")};
+  color: ${(prop) => (prop.checked ? "gray" : "black")};
+`;
 const Category = styled("span")`
   background-color: hsl(120, 60%, 90%);
   padding: 3px 5px;
@@ -77,7 +81,7 @@ const NoTasksMessage = styled("h1")`
   color: #777;
   margin: 35px;
 `;
-export default function Body({ tasks, deleteTask }) {
+export default function Body({ tasks, deleteTask, setTasks }) {
   return (
     <>
       {!tasks.length ? (
@@ -87,8 +91,19 @@ export default function Body({ tasks, deleteTask }) {
           return (
             <TaskBody key={task.id}>
               <Task>
-                <Input type="checkbox" />
-                <Info>{task.title}</Info>
+                <Input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => {
+                    const Update = tasks.map((item) =>
+                      item === task
+                        ? { ...item, completed: !item.completed }
+                        : item
+                    );
+                    setTasks(Update);
+                  }}
+                />
+                <InfoCheck checked={task.completed}>{task.title}</InfoCheck>
                 {task.category === "study" && (
                   <StudyCategory>{task.category}</StudyCategory>
                 )}

@@ -24,12 +24,14 @@ const Total = styled("p")`
   color: #777;
   padding: 20px;
 `;
-export default function Progress() {
+export default function Progress({ total, completed, pending }) {
   return (
     <Prog>
-        <Header>Today's Progress</Header>
-        <Pending>Completed: 0 | Pending: 0</Pending>
-        <Total>Total : 0</Total>
+      <Header>Today's Progress</Header>
+      <Pending>
+        Completed: {completed} | Pending: {pending}
+      </Pending>
+      <Total>Total : {total}</Total>
     </Prog>
   );
 }

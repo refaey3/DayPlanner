@@ -139,6 +139,8 @@ export default function Form({ setFormState, addNewTask }) {
   const [category, setCategory] = useState("work");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const hour = parseInt(startTime.split(":")[0]);
+
   const handelSumbit = () => {
     if (title.trim() === "") {
       Swal.fire({
@@ -153,6 +155,7 @@ export default function Form({ setFormState, addNewTask }) {
       category,
       startTime,
       endTime,
+      hour,
     };
     addNewTask(task);
     setFormState(false);
